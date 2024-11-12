@@ -1,0 +1,21 @@
+---
+- hosts: local
+  tasks:
+    - name: check connectivity with ansible ping module on localhost
+      ansible.builtin.ping:
+        data: 127.0.0.1
+
+    - name: Create a directory
+      file:
+        path: /tmp/ansible_example
+        state: directory
+        mode: '0755'
+
+    - name: Ping the nameserver 8.8.8.8
+      command: ping -c 4 8.8.8.8
+      register: ping_result
+
+    - name: Display ping result
+      debug:
+        var: ping_result.stdout
+  
